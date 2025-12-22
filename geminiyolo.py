@@ -14,17 +14,31 @@ print("⏳ Chargement du modèle de détection de véhicule...")
 vehicle_model = YOLO("yolov8n.pt")
 
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # ------------------------------------
 # 1. CONFIG GEMINI
 # ------------------------------------
-GOOGLE_API_KEY = "AIzaSyDjPWWYUmebDlbhEYCFY7nUebsBkBrfDoU"
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+if not GOOGLE_API_KEY:
+    print("❌ Erreur : GOOGLE_API_KEY introuvable dans le fichier .env")
+    exit()
+
 genai.configure(api_key=GOOGLE_API_KEY)
 gemini = genai.GenerativeModel("models/gemini-2.5-flash")
 
 # ------------------------------------
 # 2. CONFIG ROBOFLOW
 # ------------------------------------
-rf = Roboflow(api_key="ptfXYERaGOG7CBWIwzFi")
+ROBOFLOW_API_KEY = os.getenv("ROBOFLOW_API_KEY")
+if not ROBOFLOW_API_KEY:
+    print("❌ Erreur : ROBOFLOW_API_KEY introuvable dans le fichier .env")
+    exit()
+
+rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 project = rf.workspace().project("licence-plate-detector-g7sp1")
 model = project.version(1).model
 
