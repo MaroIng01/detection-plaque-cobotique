@@ -6,3 +6,4 @@ __pycache__/
 venv/
 .gemini/
 plate_crop.jpg
+plate_crop_pi.jpg

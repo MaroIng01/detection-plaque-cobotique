@@ -42,7 +42,7 @@ rf = Roboflow(api_key=ROBOFLOW_API_KEY)
 project = rf.workspace().project("licence-plate-detector-g7sp1")
 model = project.version(1).model
 
-IMAGE_PATH = "non/moto1.jpeg"
+IMAGE_PATH = "voiture/voiture6.jpg"
 
 # ------------------------------------
 # 3. PREDICTION VÉHICULE (YOLO)
